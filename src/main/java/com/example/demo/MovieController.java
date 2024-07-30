@@ -3,8 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +18,33 @@ public class MovieController {
         model.addAttribute("movies", movieService.getAllMovies());
         return "movies";
     }
+    @GetMapping("/new-movie")
+    public String movieSaveForm(Model model) {
+        model.addAttribute("movie", new Movie());
+        model.addAttribute("action", "/movies");
+        return "new-movie";
+    }
+    @PostMapping
+    public String movieSubmit(@ModelAttribute Movie movie, Model model) {
+        movieService.createMovie(movie);
+        return "redirect:/movies";
+    }
+    @RequestMapping(value = "/delete-movie", method = RequestMethod.GET)
+    private String deleteMovie(@RequestParam Long id){
+        movieService.deleteMovie(id);
+        return "redirect:/movies";
+    }
+    @RequestMapping(value = "/update-movie", method = RequestMethod.GET)
+    private String updateMovie(@RequestParam Long id, Model model){
+        Movie movie = movieService.getMovieById(id);
+        model.addAttribute("movie", movie);
+        model.addAttribute("action", "/movies/update-movie?id=" + id);
+        return "new-movie";
+    }
+    @RequestMapping(value = "/update-movie", method = RequestMethod.POST)
+    private String updateMoviePost(@RequestParam Long id, @ModelAttribute Movie movie){
+        movieService.updateMovie(movie, id);
+        return "redirect:/movies";
+    }
+
 }

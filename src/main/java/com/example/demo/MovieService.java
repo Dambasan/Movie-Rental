@@ -26,7 +26,7 @@ public class MovieService {
         Movie existingMovie = movieRepository.findById(id).orElse(null);
         if (existingMovie != null) {
             existingMovie.setMovieName(movie.getMovieName());
-            existingMovie.setMovieName(movie.getReleaseDate());
+            existingMovie.setReleaseDate(movie.getReleaseDate());
             return movieRepository.save(existingMovie);
         }else {
             return null;
