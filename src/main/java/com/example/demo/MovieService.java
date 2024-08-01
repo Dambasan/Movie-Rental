@@ -12,7 +12,10 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies(Long type) {
+        if(type != null) {
+            return movieRepository.findAllByTypeId(type);
+        }
         return movieRepository.findAll();
     }
     public Movie getMovieById(Long id) {
@@ -35,4 +38,6 @@ public class MovieService {
     public void deleteMovie(Long id) {
         movieRepository.deleteById(id);
     }
+
+
 }

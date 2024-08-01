@@ -14,10 +14,17 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public String  getAllMovies(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
+    public String  getAllMovies(Model model, @RequestParam(value = "type", required = false) Long type) {
+        model.addAttribute("movies", movieService.getAllMovies(type));
         return "movies";
     }
+
+    @GetMapping("/{id}")
+    public String getMovie(@PathVariable Long id, Model model) {
+        model.addAttribute("movie", movieService.getMovieById(id));
+        return "movie";
+    }
+
     @GetMapping("/new-movie")
     public String movieSaveForm(Model model) {
         model.addAttribute("movie", new Movie());
