@@ -21,7 +21,7 @@ public class Movie {
     @Column
     private String coverPhoto;
 
-    @Column
+    @Column(length = 2000)
     private String description;
 
     @ManyToOne
