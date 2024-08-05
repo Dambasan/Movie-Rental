@@ -114,4 +114,12 @@ public class Actor {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
 }

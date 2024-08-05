@@ -40,10 +40,11 @@ public class SetupClass {
         actorList1.add(TobinBell);
         actorList1.add(PaulWalker);
 
-        movieService.createMovie(new Movie("Esaretin Bedeli", "2000", "https://images.justwatch.com/poster/264367990/s718/esaretin-bedeli.jpg", "A Maine banker convicted of the murder of his wife and her lover in 1947 gradually forms a friendship over a quarter century with a hardened convict, while maintaining his innocence and trying to remain hopeful through simple compassion.", dram, 64, actorList1 ));
-        movieService.createMovie(new Movie("Harry Potter ve Felsefe Taşı", "2001", "https://upload.wikimedia.org/wikipedia/tr/e/e0/Harry_Potter_and_the_Sorcerer%27s_Stone_%28film%2C_2001%29.jpg", "Harry Potter", bilimKurgu,23,actorList1));
-        movieService.createMovie(new Movie("Inception", "2012", "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", "A thief who steals corporate secrets through the use of dream-sharing technology", bilimKurgu,13,actorList1));
-        movieService.createMovie(new Movie("Testere", "2012", "https://upload.wikimedia.org/wikipedia/tr/3/34/Saw_poster.jpg", "Filmin hikayesi, bu iki adamın, köhne ve terk edilmiş bir yerde, ayakları zincirle bağlı bir halde uyanmalarıyla başlar.", gerilim,36,actorList1));
-        movieService.createMovie(new Movie("Fast and Furious", "2010", "https://tr.web.img2.acsta.net/pictures/bzp/01/29173.jpg", "Hızlı ve Öfkeli'de Domenic Toretto, arabaların pahalı aksesuarlarını çalan bir çetenin baş üyesidir.", aksiyon, 25,actorList1));
+        movieService.createMovie(new Movie("Esaretin Bedeli", "2000", "https://images.justwatch.com/poster/264367990/s718/esaretin-bedeli.jpg", "A Maine banker convicted of the murder of his wife and her lover in 1947 gradually forms a friendship over a quarter century with a hardened convict, while maintaining his innocence and trying to remain hopeful through simple compassion.", dram, 64, actorList1, 3.49 ));
+        movieService.createMovie(new Movie("Harry Potter ve Felsefe Taşı", "2001", "https://upload.wikimedia.org/wikipedia/tr/e/e0/Harry_Potter_and_the_Sorcerer%27s_Stone_%28film%2C_2001%29.jpg", "Harry Potter", bilimKurgu,23,actorList1,5.49));
+        movieService.createMovie(new Movie("Inception", "2012", "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", "A thief who steals corporate secrets through the use of dream-sharing technology", bilimKurgu,13,actorList1,9.99));
+        movieService.createMovie(new Movie("Testere", "2012", "https://upload.wikimedia.org/wikipedia/tr/3/34/Saw_poster.jpg", "Filmin hikayesi, bu iki adamın, köhne ve terk edilmiş bir yerde, ayakları zincirle bağlı bir halde uyanmalarıyla başlar.", gerilim,36,actorList1,2.49));
+        movieService.createMovie(new Movie("Fast and Furious", "2010", "https://tr.web.img2.acsta.net/pictures/bzp/01/29173.jpg", "Hızlı ve Öfkeli'de Domenic Toretto, arabaların pahalı aksesuarlarını çalan bir çetenin baş üyesidir.", aksiyon, 25,actorList1,1.99));
+
     }
 }

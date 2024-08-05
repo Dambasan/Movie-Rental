@@ -35,7 +35,10 @@ public class Movie {
     @JoinTable(name = "movie_actor")
     private List<Actor> actors;
 
-    public Movie(String movieName, String releaseDate, String coverPhoto, String description, Type type, int stok, List<Actor> actors) {
+    @Column
+    private double price;
+
+    public Movie(String movieName, String releaseDate, String coverPhoto, String description, Type type, int stok, List<Actor> actors, Double price) {
         this.movieName = movieName;
         this.releaseDate = releaseDate;
         this.coverPhoto = coverPhoto;
@@ -43,6 +46,15 @@ public class Movie {
         this.type = type;
         this.stok = stok;
         this.actors = actors;
+        this.price = price;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Type getType() {
