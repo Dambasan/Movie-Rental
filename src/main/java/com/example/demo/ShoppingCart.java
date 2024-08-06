@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ShoppingCart {
     private List<CardItem> items;
+    private MovieService movieService;
+    private CartView cartView;
 
     public List<CardItem> getItems() {
         if(this.items == null) {

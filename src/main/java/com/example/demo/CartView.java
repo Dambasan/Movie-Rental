@@ -2,15 +2,14 @@ package com.example.demo;
 
 public class CartView {
     private Movie movie;
-    private Integer quantity;
+    private int quantity;
 
-    public CartView() {}
-
-    public CartView(Movie movie, Integer quantity) {
+    public CartView(Movie movie, int quantity) {
         this.movie = movie;
         this.quantity = quantity;
     }
 
+    // Getters and setters
     public Movie getMovie() {
         return movie;
     }
@@ -19,11 +18,23 @@ public class CartView {
         this.movie = movie;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public double getTotalPrice() {
+        return movie.getPrice() * quantity;
+    }
+//    public double getTotalCardPrice() {
+//        double totalPrice = 0.0;
+//        for (CardItem item : shoppingCart.getItems()) {
+//            Movie movie = movieService.getMovieById(item.getMovieId());
+//            totalPrice += getTotalPrice();
+//        }
+//        return totalPrice;
+//    }
 }
