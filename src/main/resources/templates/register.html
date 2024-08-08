@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/assets/mdb.min.css}">
+</head>
+<body>
+<header>
+    <style>
+        #intro {
+            background-image: url(https://png.pngtree.com/background/20231018/original/pngtree-vacant-movie-theater-3d-visual-representation-picture-image_5595538.jpg);
+            height: 100vh;
+        }
+
+        /* Height for devices larger than 576px */
+        @media (min-width: 992px) {
+            #intro {
+                margin-top: -58.59px;
+            }
+        }
+
+        .navbar .nav-link {
+            color: #fff !important;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a th:href="'/movies'" class="navbar-brand">Film Kiralama </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="'/movies'">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Hakkımızda</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Daha fazlası</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Türler</a></li>
+                            <li><a class="dropdown-item" href="/movies">Popüler Filmler</a></li>
+                            <li><a class="dropdown-item" href="#!">Kendimi Şanslı Hissediyorum</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="vh-100 bg-image"
+             style="background-image: url('https://s3.mortarr.com/images/project_gallery_images/chief-movie-theater-admit-one-entrance-1920x1920.jpeg');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">Yerlerinizi Alın</h2>
+                                <p>Yüzlerce filmi anında kiralayıp sevdiklerinizle sonsuz eğlencenin tadını çıkartmak
+                                    için hemen ücretsiz hesap oluşturun!</p>
+                                <br/>
+
+                                <form action="/register" method="post" th:object="${form}">
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="text" th:field="*{name}" id="form3Example1cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example1cg">Adınız</label>
+                                    </div>
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="text" th:field="*{surname}" id="form3Example2cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example1cg">Soyadınız</label>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="email" th:field="*{email}" id="form3Example3cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example3cg">Emailiniz</label>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="password" th:field="*{password}" id="form3Example4cg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example4cg">Şifre</label>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="password" th:field="*{confirmPassword}" id="form3Example4cdg"
+                                               class="form-control form-control-lg"/>
+                                        <label class="form-label" for="form3Example4cdg">Şifre Tekrar</label>
+                                    </div>
+
+                                    <!--                                    <div class="form-check d-flex justify-content-center mb-5">-->
+                                    <!--                                        <input class="form-check-input me-2" type="checkbox" value=""-->
+                                    <!--                                               id="form2Example3cg"/>-->
+                                    <!--                                        <label class="form-check-label" for="form2Example3g">-->
+                                    <!--                                            I agree all statements in <a href="#!" class="text-body"><u>Terms of-->
+                                    <!--                                            service</u></a>-->
+                                    <!--                                        </label>-->
+                                    <!--                                    </div>-->
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit"
+                                                class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+                                            Kaydol
+                                        </button>
+                                    </div>
+
+                                    <p class="text-center text-muted mt-5 mb-0">Zaten bir hesabınız var mı? <a
+                                            href="/login"
+                                            class="fw-bold text-body"><u>Buradan giriş yapın.</u></a></p>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+<!--Main Navigation-->
+
+<!--Footer-->
+<footer class="bg-light text-lg-start">
+    <hr class="m-0"/>
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2024 Copyright:
+        <a class="text-dark" href="#">FilmKiralama.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!--Footer-->
+<!-- MDB -->
+<script type="text/javascript" th:src="@{/assets/mdb.umd.min.js}"></script>
+</body>
+</html>

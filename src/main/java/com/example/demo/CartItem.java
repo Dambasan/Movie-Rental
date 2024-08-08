@@ -1,8 +1,9 @@
 package com.example.demo;
 
-public class CardItem {
+public class CartItem {
     private Long movieId;
     private Integer quantity;
+
 
     public Long getMovieId() {
         return movieId;
@@ -19,4 +20,5 @@ public class CardItem {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 }

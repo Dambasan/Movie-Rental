@@ -1,5 +1,9 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.*;
+import com.example.demo.models.Movie;
+import com.example.demo.models.ShoppingCart;
+import com.example.demo.service.MovieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +37,13 @@ public class ShoppingCartController {
             cart = (ShoppingCart) session.getAttribute("cart");
         }
         if (cart.containsItem(movie.getMovieId())) {
-            CardItem item = cart.getItem(movie.getMovieId());
+            CartItem item = cart.getItem(movie.getMovieId());
             item.setQuantity(item.getQuantity() + 1);
         } else {
-            CardItem cardItem = new CardItem();
-            cardItem.setMovieId(movie.getMovieId());
-            cardItem.setQuantity(1);
-            cart.getItems().add(cardItem);
+            CartItem cartItem = new CartItem();
+            cartItem.setMovieId(movie.getMovieId());
+            cartItem.setQuantity(1);
+            cart.getItems().add(cartItem);
         }
         session.setAttribute("cart", cart);
         session.setAttribute("cartCount", getQuantity(session));
@@ -66,10 +69,10 @@ public class ShoppingCartController {
         List<CartView> moviesCart = new ArrayList<>();
         if (session.getAttribute("cart") != null) {
             cart = (ShoppingCart) session.getAttribute("cart");
-            for (CardItem cardItem : cart.getItems()) {
-                Movie movie = movieService.getMovieById(cardItem.getMovieId());
-                double totalPrice = movie.getPrice() * cardItem.getQuantity();
-                CartView cartView = new CartView(movie, cardItem.getQuantity());
+            for (CartItem cartItem : cart.getItems()) {
+                Movie movie = movieService.getMovieById(cartItem.getMovieId());
+                double totalPrice = movie.getPrice() * cartItem.getQuantity();
+                CartView cartView = new CartView(movie, cartItem.getQuantity());
                 moviesCart.add(cartView);
             }
             model.addAttribute("total", getTotalCardPrice(cart));
@@ -103,16 +106,27 @@ public class ShoppingCartController {
     @PostMapping("/decrement")
     public String decrementCart(HttpSession session, Model model, Long id) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        cart.getItem(id).setQuantity(cart.getItem(id).getQuantity() - 1);
+        if(cart.getItem(id).getQuantity() > 1) {
+            cart.getItem(id).setQuantity(cart.getItem(id).getQuantity() - 1);
+        }else{
+            cart.removeItem(id);
+        }
         return "redirect:/cart";
     }
-    // Toplam fiyatı hesaplayan yöntem
     public double getTotalCardPrice(ShoppingCart cart) {
         double totalPrice = 0.0;
-        for (CardItem item : cart.getItems()) {
+        for (CartItem item : cart.getItems()) {
             Movie movie = movieService.getMovieById(item.getMovieId());
             totalPrice += item.getQuantity() * movie.getPrice();
         }
         return totalPrice;
+    }
+    @RequestMapping("/remove")
+    public String removeItem(HttpSession session, Model model, Long id) {
+        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        if (cart != null) {
+            cart.removeItem(id);
+        }
+        return "redirect:/cart";
     }
 }

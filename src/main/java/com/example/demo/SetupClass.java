@@ -1,5 +1,11 @@
 package com.example.demo;
 
+import com.example.demo.models.Actor;
+import com.example.demo.models.Movie;
+import com.example.demo.models.Type;
+import com.example.demo.repository.ActorRepository;
+import com.example.demo.repository.TypeRepository;
+import com.example.demo.service.MovieService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +32,7 @@ public class SetupClass {
         Type korku = typeRepository.save(new Type("Korku"));
         Type gerilim = typeRepository.save(new Type("Gerilim"));
         Type dram = typeRepository.save(new Type("Dram"));
+        Type romantizm = typeRepository.save(new Type("Romantizm"));
 
         Actor DanielRadcliffe = actorRepository.save(new Actor("Daniel","Radcliffe","M","26-05-1996","İngilterede Doğup büyüdü", 28,"https://m.media-amazon.com/images/M/MV5BZmE0NzNiNzQtYTVlYS00MjljLWE4MTgtYzYxNjU2NjZkM2M4XkEyXkFqcGdeQXVyNjY5NDgzNjQ@._V1_.jpg"));
         Actor MorganFreeman = actorRepository.save(new Actor("Morgan","Freeman","M","21-01-1967","Siyahi Her Filmde Olan Adam",57,"https://m.media-amazon.com/images/M/MV5BMTc0MDMyMzI2OF5BMl5BanBnXkFtZTcwMzM2OTk1MQ@@._V1_FMjpg_UX1000_.jpg"));
@@ -45,6 +52,5 @@ public class SetupClass {
         movieService.createMovie(new Movie("Inception", "2012", "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", "A thief who steals corporate secrets through the use of dream-sharing technology", bilimKurgu,13,actorList1,9.99));
         movieService.createMovie(new Movie("Testere", "2012", "https://upload.wikimedia.org/wikipedia/tr/3/34/Saw_poster.jpg", "Filmin hikayesi, bu iki adamın, köhne ve terk edilmiş bir yerde, ayakları zincirle bağlı bir halde uyanmalarıyla başlar.", gerilim,36,actorList1,2.49));
         movieService.createMovie(new Movie("Fast and Furious", "2010", "https://tr.web.img2.acsta.net/pictures/bzp/01/29173.jpg", "Hızlı ve Öfkeli'de Domenic Toretto, arabaların pahalı aksesuarlarını çalan bir çetenin baş üyesidir.", aksiyon, 25,actorList1,1.99));
-
     }
 }

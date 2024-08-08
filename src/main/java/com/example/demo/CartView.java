@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.models.Movie;
+
 public class CartView {
     private Movie movie;
     private int quantity;
@@ -28,6 +30,9 @@ public class CartView {
 
     public double getTotalPrice() {
         return movie.getPrice() * quantity;
+    }
+    public void deleteItem(Long id){
+
     }
 //    public double getTotalCardPrice() {
 //        double totalPrice = 0.0;

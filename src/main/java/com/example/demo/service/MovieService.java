@@ -1,10 +1,10 @@
-package com.example.demo;
+package com.example.demo.service;
 
-import jakarta.persistence.Id;
+import com.example.demo.models.Movie;
+import com.example.demo.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service

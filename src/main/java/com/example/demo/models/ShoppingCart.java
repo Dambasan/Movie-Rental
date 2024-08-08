@@ -1,21 +1,25 @@
-package com.example.demo;
+package com.example.demo.models;
+
+import com.example.demo.CartItem;
+import com.example.demo.CartView;
+import com.example.demo.service.MovieService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    private List<CardItem> items;
+    private List<CartItem> items;
     private MovieService movieService;
     private CartView cartView;
 
-    public List<CardItem> getItems() {
+    public List<CartItem> getItems() {
         if(this.items == null) {
             this.items = new ArrayList<>();
         }
         return items;
     }
 
-    public void setItems(List<CardItem> items) {
+    public void setItems(List<CartItem> items) {
         this.items = items;
     }
 
@@ -28,12 +32,15 @@ public class ShoppingCart {
         return false;
     }
 
-    public CardItem getItem(Long id) {
+    public CartItem getItem(Long id) {
         for (int i = 0; i < getItems().size(); i++) {
             if(getItems().get(i).getMovieId().equals(id)) {
                 return getItems().get(i);
             }
         }
         return null;
+    }
+    public void removeItem(Long movieId) {
+        items.removeIf(item -> item.getMovieId().equals(movieId));
     }
 }
