@@ -24,6 +24,8 @@ public class User {
     @Column(nullable = false)
     private String surname;
 
+    private String role = "ROLE_USER";
+
     public long getId() {
         return id;
     }
@@ -58,5 +60,13 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

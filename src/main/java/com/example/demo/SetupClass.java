@@ -3,11 +3,14 @@ package com.example.demo;
 import com.example.demo.models.Actor;
 import com.example.demo.models.Movie;
 import com.example.demo.models.Type;
+import com.example.demo.models.User;
 import com.example.demo.repository.ActorRepository;
 import com.example.demo.repository.TypeRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.MovieService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -24,6 +27,12 @@ public class SetupClass {
 
     @Autowired
     private ActorRepository actorRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void init() {
@@ -52,5 +61,23 @@ public class SetupClass {
         movieService.createMovie(new Movie("Inception", "2012", "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg", "A thief who steals corporate secrets through the use of dream-sharing technology", bilimKurgu,13,actorList1,9.99));
         movieService.createMovie(new Movie("Testere", "2012", "https://upload.wikimedia.org/wikipedia/tr/3/34/Saw_poster.jpg", "Filmin hikayesi, bu iki adamın, köhne ve terk edilmiş bir yerde, ayakları zincirle bağlı bir halde uyanmalarıyla başlar.", gerilim,36,actorList1,2.49));
         movieService.createMovie(new Movie("Fast and Furious", "2010", "https://tr.web.img2.acsta.net/pictures/bzp/01/29173.jpg", "Hızlı ve Öfkeli'de Domenic Toretto, arabaların pahalı aksesuarlarını çalan bir çetenin baş üyesidir.", aksiyon, 25,actorList1,1.99));
+
+        User admin = new User();
+        admin.setRole("ROLE_ADMIN");
+        admin.setSurname("Dambasan");
+        admin.setEmail("yusuf@gmail.com");
+        admin.setName("Yusuf");
+        admin.setPassword(passwordEncoder.encode("1234"));
+        userRepository.save(admin);
+
+        User admin2 = new User();
+        admin2.setRole("ROLE_ADMIN");
+        admin2.setSurname("Dambasan2");
+        admin2.setEmail("yusuf2@gmail.com");
+        admin2.setName("Yusuf2");
+        admin2.setPassword(passwordEncoder.encode("12345678"));
+        userRepository.save(admin2);
+
+
     }
 }

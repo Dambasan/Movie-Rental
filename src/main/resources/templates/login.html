@@ -6,126 +6,89 @@
     <link rel="stylesheet" th:href="@{/assets/mdb.min.css}">
 </head>
 <body>
-<header>
-    <style>
-        #intro {
-            background-image: url(https://png.pngtree.com/background/20231018/original/pngtree-vacant-movie-theater-3d-visual-representation-picture-image_5595538.jpg);
-            height: 100vh;
-        }
+<div>
+    <div th:replace="fragments::menu">Static Header</div>
+    <header>
 
-        /* Height for devices larger than 576px */
-        @media (min-width: 992px) {
+        <style>
             #intro {
-                margin-top: -58.59px;
+                background-image: url(https://png.pngtree.com/background/20231018/original/pngtree-vacant-movie-theater-3d-visual-representation-picture-image_5595538.jpg);
+                height: 100vh;
             }
-        }
 
-        .navbar .nav-link {
-            color: #fff !important;
-        }
-    </style>
+            /* Height for devices larger than 576px */
+            @media (min-width: 992px) {
+                #intro {
+                    margin-top: -58.59px;
+                }
+            }
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a th:href="'/movies'" class="navbar-brand">Film Kiralama </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="'/movies'">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Hakkımızda</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Daha fazlası</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Türler</a></li>
-                            <li><a class="dropdown-item" href="#!">Popüler Filmler</a></li>
-                            <li><a class="dropdown-item" href="#!">Kendimi Şanslı Hissediyorum</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Sepetim
-                        <span class="badge bg-dark text-white ms-1 rounded-pill"
-                              th:text="${#ctx.session.containsKey('cartCount') ? #ctx.session.get('cartCount') : '0'}"></span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </nav>
+            .navbar .nav-link {
+                color: #fff !important;
+            }
+        </style>
 
-    <!-- Background image -->
-    <div id="intro" class="bg-image shadow-2-strong">
-        <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-5 col-md-8">
-                        <form action="login" method="post" th:object="${form}" class="bg-white rounded shadow-5-strong p-5">
-                            <h3 style="text-align: center; color: dodgerblue">Giriş Yap</h3>
-                            <br/>
-                            <!-- Email input -->
-                            <div class="form-outline mb-4" data-mdb-input-init>
-                                <input th:field="*{username}" type="email" id="form1Example1" class="form-control"/>
-                                <label class="form-label" for="form1Example1">Email adresi</label>
-                            </div>
+        <!-- Background image -->
+        <div id="intro" class="bg-image shadow-2-strong">
+            <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-5 col-md-8">
+                            <form action="login" method="post" th:object="${form}"
+                                  class="bg-white rounded shadow-5-strong p-5">
+                                <h3 style="text-align: center; color: dodgerblue">Giriş Yap</h3>
+                                <br/>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4" data-mdb-input-init>
+                                    <input th:field="*{username}" type="email" id="form1Example1" class="form-control"/>
+                                    <label class="form-label" for="form1Example1">Email adresi</label>
+                                </div>
 
-                            <!-- Password input -->
-                            <div class="form-outline mb-4" data-mdb-input-init>
-                                <input th:field="*{password}" type="password" id="form1Example2" class="form-control"/>
-                                <label class="form-label" for="form1Example2">Şifre</label>
-                            </div>
+                                <!-- Password input -->
+                                <div class="form-outline mb-4" data-mdb-input-init>
+                                    <input th:field="*{password}" type="password" id="form1Example2"
+                                           class="form-control"/>
+                                    <label class="form-label" for="form1Example2">Şifre</label>
+                                </div>
 
-                            <!-- 2 column grid layout for inline styling -->
-                            <div class="row mb-4">
-                                <div class="col d-flex justify-content-center">
-                                    <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3"
-                                               checked/>
-                                        <label class="form-check-label" for="form1Example3">
-                                            Beni Hatırla
-                                        </label>
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="form1Example3"
+                                                   checked/>
+                                            <label class="form-check-label" for="form1Example3">
+                                                Beni Hatırla
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col text-center">
+                                        <!-- Simple link -->
+                                        <a href="#!">Şifremi Unuttum</a>
                                     </div>
                                 </div>
 
-                                <div class="col text-center">
-                                    <!-- Simple link -->
-                                    <a href="#!">Şifremi Unuttum</a>
-                                </div>
-                            </div>
-
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block" data-mdb-ripple-init>Giriş Yap
-                            </button>
-                            <a class="btn btn-primary btn-block" href="/register"
-                               data-mdb-ripple-init>Kayıt ol
-                            </a>
-                        </form>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block" data-mdb-ripple-init>Giriş Yap
+                                </button>
+                                <a class="btn btn-primary btn-block" href="/register"
+                                   data-mdb-ripple-init>Kayıt ol
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Background image -->
-</header>
+        <!-- Background image -->
+    </header>
+</div>
 <!--Main Navigation-->
 
 <!--Footer-->
-<footer class="bg-light text-lg-start">
-    <hr class="m-0"/>
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2024 Copyright:
-        <a class="text-dark" href="#">FilmKiralama.com</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+<div th:replace="fragments::footer">Static Footer</div>
 <!--Footer-->
 <!-- MDB -->
 <script type="text/javascript" th:src="@{/assets/mdb.umd.min.js}"></script>

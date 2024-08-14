@@ -34,12 +34,4 @@ public class CartView {
     public void deleteItem(Long id){
 
     }
-//    public double getTotalCardPrice() {
-//        double totalPrice = 0.0;
-//        for (CardItem item : shoppingCart.getItems()) {
-//            Movie movie = movieService.getMovieById(item.getMovieId());
-//            totalPrice += getTotalPrice();
-//        }
-//        return totalPrice;
-//    }
 }

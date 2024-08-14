@@ -25,31 +25,7 @@
         }
     </style>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a th:href="'/movies'" class="navbar-brand">Film Kiralama </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="'/movies'">Ana Sayfa</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#!">Hakkımızda</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Daha fazlası</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Türler</a></li>
-                            <li><a class="dropdown-item" href="/movies">Popüler Filmler</a></li>
-                            <li><a class="dropdown-item" href="#!">Kendimi Şanslı Hissediyorum</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="fragments::menu">Static Header</div>
     <section class="vh-100 bg-image"
              style="background-image: url('https://s3.mortarr.com/images/project_gallery_images/chief-movie-theater-admit-one-entrance-1920x1920.jpeg');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -127,16 +103,7 @@
 <!--Main Navigation-->
 
 <!--Footer-->
-<footer class="bg-light text-lg-start">
-    <hr class="m-0"/>
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2024 Copyright:
-        <a class="text-dark" href="#">FilmKiralama.com</a>
-    </div>
-    <!-- Copyright -->
-</footer>
+<div th:replace="fragments::footer">Static Footer</div>
 <!--Footer-->
 <!-- MDB -->
 <script type="text/javascript" th:src="@{/assets/mdb.umd.min.js}"></script>

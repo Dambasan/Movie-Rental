@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+<div th:fragment="menu">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a th:href="'/movies'" class="navbar-brand">Film Kiralama </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="'/movies'">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Hakkımızda</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Daha fazlası</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Türler</a></li>
+                            <li><a class="dropdown-item" href="#!">Popüler Filmler</a></li>
+                            <li><a class="dropdown-item" href="#!">Kendimi Şanslı Hissediyorum</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" sec:authorize="isAuthenticated()">
+                    <a class="btn btn-outline-dark" href="/cart">
+                        <i class="bi-cart-fill me-1"></i>
+                        <span class="badge text-dark"
+                              th:text="'Sepetim' + ':' + ${#ctx.session.containsKey('cartCount') ? #ctx.session.get('cartCount') : '0'}">
+                        </span>
+                    </a>
+                    <a class="btn btn-outline-dark" href="/profile">
+                        <i class="bi-cart-fill me-1"></i>
+                        <span class="badge text-dark"
+                              th:text="${@userInfo.name + ' ' + @userInfo.surname}">
+                    </span>
+                    </a>
+                </form>
+                <form class="d-flex" sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-dark" href="/login">
+                        Giriş Yap
+                    </a>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div>
+
+</div>
+<footer th:fragment="footer" class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Telif Hakkı &copy; Film Kiralama 2024</p></div>
+</footer>
+</body>
+</html>

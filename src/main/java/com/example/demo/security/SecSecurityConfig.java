@@ -28,7 +28,7 @@ public class SecSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        return http.formLogin(f -> f.loginPage("/login").permitAll())
+        return http.formLogin(f -> f.loginPage("/login").successHandler(((request, response, authentication) -> response.sendRedirect("/movies"))).permitAll())
                 .csrf(AbstractHttpConfigurer::disable)
                 .userDetailsService(userDetailsService)
                 .authorizeHttpRequests(a -> a
