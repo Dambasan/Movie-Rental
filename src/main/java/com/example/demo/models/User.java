@@ -24,6 +24,9 @@ public class User {
     @Column(nullable = false)
     private String surname;
 
+    @OneToOne(mappedBy = "user")
+    private CartEntity cartEntity;
+
     private String role = "ROLE_USER";
 
     public long getId() {

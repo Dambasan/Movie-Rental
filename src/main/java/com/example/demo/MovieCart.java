@@ -2,7 +2,7 @@ package com.example.demo;
 
 public class MovieCart {
     private Long movieId;
-    private Long quantity;
+    private Integer quantity;
 
     public Long getMovieId() {
         return movieId;
@@ -12,11 +12,11 @@ public class MovieCart {
         this.movieId = movieId;
     }
 
-    public Long getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 }

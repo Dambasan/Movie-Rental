@@ -28,7 +28,7 @@
                     <a class="btn btn-outline-dark" href="/cart">
                         <i class="bi-cart-fill me-1"></i>
                         <span class="badge text-dark"
-                              th:text="'Sepetim' + ':' + ${#ctx.session.containsKey('cartCount') ? #ctx.session.get('cartCount') : '0'}">
+                              th:text="'Sepetim' + ':' + ${@cartUtil.getCartCount()}">
                         </span>
                     </a>
                     <a class="btn btn-outline-dark" href="/profile">

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.*;
-import com.example.demo.models.Movie;
-import com.example.demo.models.ShoppingCart;
+import com.example.demo.models.*;
+import com.example.demo.service.CartService;
 import com.example.demo.service.MovieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,29 +27,10 @@ public class ShoppingCartController {
     private MovieService movieService;
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private CartService cartService;
 
     private CartView cartView;
-
-    @PostMapping
-    public void addCart(@ModelAttribute MovieCart movie, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ShoppingCart cart = new ShoppingCart();
-        if (session.getAttribute("cart") != null) {
-            cart = (ShoppingCart) session.getAttribute("cart");
-        }
-        if (cart.containsItem(movie.getMovieId())) {
-            CartItem item = cart.getItem(movie.getMovieId());
-            item.setQuantity(item.getQuantity() + 1);
-        } else {
-            CartItem cartItem = new CartItem();
-            cartItem.setMovieId(movie.getMovieId());
-            cartItem.setQuantity(1);
-            cart.getItems().add(cartItem);
-        }
-        session.setAttribute("cart", cart);
-        session.setAttribute("cartCount", getQuantity(session));
-        String referer = request.getHeader(HttpHeaders.REFERER);
-        response.sendRedirect(referer);
-    }
 
     public int getQuantity(HttpSession session) {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
@@ -63,13 +44,19 @@ public class ShoppingCartController {
         return 0;
     }
 
+    @PostMapping
+    public void addCart(@ModelAttribute MovieCart movie, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        cartService.addItem(movie.getMovieId(), movie.getQuantity());
+        String referer = request.getHeader(HttpHeaders.REFERER);
+        response.sendRedirect(referer);
+    }
+
     @GetMapping
-    public String getCart(HttpSession session, Model model) {
-        ShoppingCart cart = null;
+    public String getCart(Model model) {
+        CartEntity cart = cartService.getCart();
         List<CartView> moviesCart = new ArrayList<>();
-        if (session.getAttribute("cart") != null) {
-            cart = (ShoppingCart) session.getAttribute("cart");
-            for (CartItem cartItem : cart.getItems()) {
+        if (cart != null) {
+            for (CartItemEntity cartItem : cart.getCardItemEntities()) {
                 Movie movie = movieService.getMovieById(cartItem.getMovieId());
                 double totalPrice = movie.getPrice() * cartItem.getQuantity();
                 CartView cartView = new CartView(movie, cartItem.getQuantity());
@@ -81,52 +68,30 @@ public class ShoppingCartController {
         return "Cart";
     }
 
-//    @GetMapping
-//    public String getCart(HttpSession session, Model model) {
-//        ShoppingCart cart = null;
-//        List<CartView> moviesCart = new ArrayList<>();
-//        if(session.getAttribute("cart") != null) {
-//            cart = (ShoppingCart) session.getAttribute("cart");
-//            for (int i = 0; i < cart.getItems().size(); i++) {
-//                CardItem cardItem = cart.getItems().get(i);
-//                moviesCart.add(new CartView(movieService.getMovieById(cardItem.getMovieId()), cardItem.getQuantity()));
-//            }
-//        }
-//        model.addAttribute("moviesCart", moviesCart);
-//        return "Cart";
-//    }
-
     @PostMapping("/increment")
-    public String incrementCart(HttpSession session, Model model, Long id) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        cart.getItem(id).setQuantity(cart.getItem(id).getQuantity() + 1);
+    public String incrementCart(Long id) {
+        cartService.addItem(id, 1);
         return "redirect:/cart";
     }
 
     @PostMapping("/decrement")
-    public String decrementCart(HttpSession session, Model model, Long id) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if(cart.getItem(id).getQuantity() > 1) {
-            cart.getItem(id).setQuantity(cart.getItem(id).getQuantity() - 1);
-        }else{
-            cart.removeItem(id);
-        }
+    public String decrementCart(Long id) {
+        cartService.addItem(id, -1);
         return "redirect:/cart";
     }
-    public double getTotalCardPrice(ShoppingCart cart) {
+
+    public double getTotalCardPrice(CartEntity cart) {
         double totalPrice = 0.0;
-        for (CartItem item : cart.getItems()) {
+        for (CartItemEntity item : cart.getCardItemEntities()) {
             Movie movie = movieService.getMovieById(item.getMovieId());
             totalPrice += item.getQuantity() * movie.getPrice();
         }
         return totalPrice;
     }
+
     @RequestMapping("/remove")
-    public String removeItem(HttpSession session, Model model, Long id) {
-        ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            cart.removeItem(id);
-        }
+    public String removeItem(Long id) {
+        cartService.removeItem(id);
         return "redirect:/cart";
     }
 }

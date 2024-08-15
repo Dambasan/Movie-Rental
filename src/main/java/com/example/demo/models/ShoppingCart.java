@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import com.example.demo.CartItem;
 import com.example.demo.CartView;
 import com.example.demo.service.MovieService;
 
