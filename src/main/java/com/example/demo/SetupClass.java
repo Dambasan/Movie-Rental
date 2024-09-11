@@ -70,13 +70,13 @@ public class SetupClass {
         admin.setPassword(passwordEncoder.encode("1234"));
         userRepository.save(admin);
 
-        User admin2 = new User();
-        admin2.setRole("ROLE_ADMIN");
-        admin2.setSurname("Dambasan2");
-        admin2.setEmail("yusuf2@gmail.com");
-        admin2.setName("Yusuf2");
-        admin2.setPassword(passwordEncoder.encode("12345678"));
-        userRepository.save(admin2);
+        User user = new User();
+        user.setRole("ROLE_USER");
+        user.setSurname("Dambasan2");
+        user.setEmail("yusuf2@gmail.com");
+        user.setName("Yusuf2");
+        user.setPassword(passwordEncoder.encode("12345678"));
+        userRepository.save(user);
 
 
     }
